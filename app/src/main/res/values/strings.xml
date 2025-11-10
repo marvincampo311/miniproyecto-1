@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">miiproyecto 1</string>
+    <string name="app_name">InventoryApp</string>
+    <string name="inventory_text">Inventory</string>
+    <string name="how_much_inventory">¿Cuánto tengo de inventario?</string>
+    <string name="hidden_inventory_value">💲 ****</string> <string name="manage_inventory_button_text">Gestionar Inventario</string>
+    <string name="content_description_app_logo">Logo de la aplicación de inventario</string>
+    <string name="content_description_toggle_visibility">Alternar visibilidad del inventario</string>
+    <string name="content_description_settings">Ajustes del widget</string>
+    <string name="app_widget_description">Widget para ver y gestionar tu inventario rápidamente.</string>
 </resources>

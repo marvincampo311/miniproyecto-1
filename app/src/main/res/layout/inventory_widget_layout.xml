@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/widget_background"
+        android:padding="8dp"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <ImageView
+            android:id="@+id/app_logo"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/content_description_app_logo"
+            android:src="@drawable/ic_inventory_logo" />
+
+        <TextView
+            android:id="@+id/inventory_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/app_logo"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/app_logo"
+            android:text="@string/inventory_text"
+            android:textColor="@color/orange_inventory"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/question_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/inventory_label"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:text="@string/how_much_inventory"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/inventory_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/question_text"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="4dp"
+            android:text="@string/hidden_inventory_value"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/toggle_visibility_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignTop="@id/question_text"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="@string/content_description_toggle_visibility"
+            android:src="@drawable/ic_visibility_on" />
+
+        <Button
+            android:id="@+id/manage_inventory_button"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_below="@id/inventory_value"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_background_selector"
+            android:minHeight="48dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/manage_inventory_button_text"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/settings_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignBottom="@id/manage_inventory_button"
+            android:layout_marginEnd="187dp"
+            android:layout_marginBottom="0dp"
+            android:layout_toStartOf="@id/manage_inventory_button"
+            android:contentDescription="@string/content_description_settings"
+            android:padding="12dp"
+            android:src="@drawable/ic_settings"
+            android:tint="@color/white"
+            tools:ignore="UseAppTint" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
