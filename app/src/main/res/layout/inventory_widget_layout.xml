@@ -1,99 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- Criterio 1: Contenedor principal con fondo negro semitransparente y esquinas redondeadas -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/widget_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@drawable/widget_background"
+    android:orientation="vertical"
+    android:padding="16dp">
 
+    <!-- CABECERA (Logo, Título, Icono de Ajustes) -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/widget_background"
-        android:padding="8dp"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
 
-        <ImageView
-            android:id="@+id/app_logo"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:contentDescription="@string/content_description_app_logo"
-            android:src="@drawable/ic_inventory_logo" />
-
-        <TextView
-            android:id="@+id/inventory_label"
+        <!-- Criterio 2: Logo y Título -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/app_logo"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@id/app_logo"
-            android:text="@string/inventory_text"
-            android:textColor="@color/orange_inventory"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/question_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/inventory_label"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="8dp"
-            android:text="@string/how_much_inventory"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/inventory_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/question_text"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="4dp"
-            android:text="@string/hidden_inventory_value"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            <!-- Logo (Criterio 2) -->
+            <ImageView
+                android:id="@+id/logo_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/inventario_logo"
+                android:src="@drawable/ic_inventory_logo" />
 
-        <ImageView
-            android:id="@+id/toggle_visibility_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignTop="@id/question_text"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="4dp"
-            android:contentDescription="@string/content_description_toggle_visibility"
-            android:src="@drawable/ic_visibility_on" />
+            <!-- Criterio 3: Título -->
+            <TextView
+                android:id="@+id/widget_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inventario_general"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/manage_inventory_button"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_below="@id/inventory_value"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/button_background_selector"
-            android:minHeight="48dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="@string/manage_inventory_button_text"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
+        <!-- Criterio 12: Icono de Ajustes (Naranja) -->
         <ImageView
             android:id="@+id/settings_icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_alignBottom="@id/manage_inventory_button"
-            android:layout_marginEnd="187dp"
-            android:layout_marginBottom="0dp"
-            android:layout_toStartOf="@id/manage_inventory_button"
-            android:contentDescription="@string/content_description_settings"
-            android:padding="12dp"
-            android:src="@drawable/ic_settings"
-            android:tint="@color/white"
-            tools:ignore="UseAppTint" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:contentDescription="@string/ajustes_de_inventario"
+            android:focusable="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_settings" />
+        <!-- Aumentado a 40dp para mejorar el objetivo táctil. -->
+
     </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- CUERPO CENTRAL (Valor y Alternancia) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Criterio 4: Etiqueta del valor -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:text="@string/valor_de_inventario"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp" />
+
+            <!-- Criterio 8 & 9: Valor (Texto Grande en Naranja) -->
+            <TextView
+                android:id="@+id/inventory_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ ****"
+                android:textColor="#FA8523"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+        <!-- Criterio 6, 7, 10: Icono de visibilidad (Ojo) -->
+        <ImageView
+            android:id="@+id/toggle_visibility_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:clickable="true"
+            android:contentDescription="@string/alternar_visibilidad_del_inventario"
+            android:focusable="true"
+            android:src="@drawable/ic_visibility_on" />
+        <!-- Aumentado a 40dp para mejorar el objetivo táctil. -->
+
+    </LinearLayout>
+
+    <!-- PIE DE PÁGINA (Botón de Gestión) -->
+
+    <!-- Criterio 11: Botón de Gestionar Inventario -->
+    <Button
+        android:id="@+id/manage_inventory_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_background_orange"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:minHeight="40dp"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        android:text="@string/gestionar_inventario"
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
+    <!-- Cambiado a wrap_content y centrado para evitar ser "demasiado ancho". -->
+
+</LinearLayout>

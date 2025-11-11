@@ -18,10 +18,19 @@ import com.example.miiproyecto1.R
  */
 class InventoryWidgetProvider : AppWidgetProvider() {
 
-    // Constante para identificar la acción de alternar visibilidad
+    // Constantes y variables de estado (COMPLETADO)
     companion object {
-        private const val TOGGLE_VISIBILITY_ACTION = "com.example.inventoryapp.TOGGLE_VISIBILITY"
-        private var isInventoryVisible = false // Estado global para la visibilidad del inventario
+        private const val TOGGLE_VISIBILITY_ACTION = "com.example.miiproyecto1.TOGGLE_VISIBILITY"
+
+        // AÑADE ESTA LÍNEA para definir la constante
+        private const val MANAGE_INVENTORY_ACTION = "com.example.miiproyecto1.MANAGE_INVENTORY"
+
+        // Variable global para el estado de visibilidad.
+        private var isInventoryVisible = false
+
+        // Valores simulados de inventario (Criterios 8, 9, 10)
+        private const val INVENTORY_VALUE_FORMATTED = "$ 326.000,00"
+        private const val HIDDEN_VALUE = "$ ****"
     }
 
     /**
@@ -69,19 +78,31 @@ class InventoryWidgetProvider : AppWidgetProvider() {
      */
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
-        if (intent.action == TOGGLE_VISIBILITY_ACTION) {
-            // Se ha recibido la acción de alternar visibilidad
-            isInventoryVisible = !isInventoryVisible // Cambia el estado
 
-            // Re-obtener el ID del widget para actualizarlo
-            val appWidgetId = intent.extras?.getInt(
-                AppWidgetManager.EXTRA_APPWIDGET_ID,
-                AppWidgetManager.INVALID_APPWIDGET_ID
-            ) ?: AppWidgetManager.INVALID_APPWIDGET_ID
+        // Obtener el ID del widget para la actualización
+        val appWidgetId = intent.extras?.getInt(
+            AppWidgetManager.EXTRA_APPWIDGET_ID,
+            AppWidgetManager.INVALID_APPWIDGET_ID
+        ) ?: AppWidgetManager.INVALID_APPWIDGET_ID
 
-            if (appWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
-                val appWidgetManager = AppWidgetManager.getInstance(context)
-                updateAppWidget(context, appWidgetManager, appWidgetId) // Actualiza la UI
+        when (intent.action) {
+            // Criterios 7 y 10: Alternar visibilidad (icono del ojo)
+            TOGGLE_VISIBILITY_ACTION -> {
+                isInventoryVisible = !isInventoryVisible // Cambia el estado
+                if (appWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
+                    val appWidgetManager = AppWidgetManager.getInstance(context)
+                    updateAppWidget(context, appWidgetManager, appWidgetId)
+                }
+            }
+
+            // Criterio 13: Clic en el botón o icono de gestionar/ajustes
+            MANAGE_INVENTORY_ACTION -> {
+                // Redirigir a la "HU 2.0 Ventana Login".
+                // Asumimos que esta es la MainActivity, o una LoginActivity dedicada.
+                val loginIntent = Intent(context, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                context.startActivity(loginIntent)
             }
         }
     }
@@ -92,51 +113,49 @@ class InventoryWidgetProvider : AppWidgetProvider() {
      */
     @SuppressLint("RemoteViewLayout")
     private fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
-        // RemoteViews se utiliza para interactuar con el layout del widget,
-        // ya que el widget se ejecuta en un proceso separado.
         val views = RemoteViews(context.packageName, R.layout.inventory_widget_layout)
 
-        // Actualizar el valor del inventario y el icono de visibilidad
+        // 1. Criterio 7 y 10: Actualizar el valor y el icono del ojo
         if (isInventoryVisible) {
-            // Si el inventario es visible, mostramos un valor de ejemplo y el icono de ojo cerrado
-            views.setTextViewText(R.id.inventory_value, "💲 1234") // Valor real (simulado)
+            // Criterio 7: Mostrar el saldo y cambiar el icono a ojo cerrado
+            views.setTextViewText(R.id.inventory_value, INVENTORY_VALUE_FORMATTED)
             views.setImageViewResource(R.id.toggle_visibility_icon, R.drawable.ic_visibility_off)
         } else {
-            // Si está oculto, mostramos los asteriscos y el icono de ojo abierto
-            views.setTextViewText(R.id.inventory_value, context.getString(R.string.hidden_inventory_value))
+            // Criterio 10: Ocultar el saldo y cambiar el icono a ojo abierto
+            views.setTextViewText(R.id.inventory_value, HIDDEN_VALUE)
             views.setImageViewResource(R.id.toggle_visibility_icon, R.drawable.ic_visibility_on)
         }
 
-        // Configurar el PendingIntent para el icono del ojo (toggle visibility)
+        // 2. Configuración de PendingIntent para el icono del ojo (Criterios 7, 10)
         val toggleVisibilityIntent = Intent(context, InventoryWidgetProvider::class.java).apply {
             action = TOGGLE_VISIBILITY_ACTION
             putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
         }
         val togglePendingIntent: PendingIntent = PendingIntent.getBroadcast(
             context,
-            appWidgetId, // Usamos el appWidgetId como request code para unicidad
+            appWidgetId,
             toggleVisibilityIntent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
         views.setOnClickPendingIntent(R.id.toggle_visibility_icon, togglePendingIntent)
 
-        // Configurar el PendingIntent para el botón "Gestionar Inventario"
-        // Este PendingIntent abrirá la actividad principal de la app (MainActivity).
-        val appIntent = Intent(context, MainActivity::class.java) // Asegúrate de que MainActivity sea tu actividad principal
-        val pendingAppIntent: PendingIntent = PendingIntent.getActivity(
+
+        // 3. Configuración de PendingIntent para Gestión (Criterio 13)
+        val manageIntent = Intent(context, InventoryWidgetProvider::class.java).apply {
+            action = MANAGE_INVENTORY_ACTION
+        }
+        val managePendingIntent: PendingIntent = PendingIntent.getBroadcast(
             context,
-            0, // Request code
-            appIntent,
+            appWidgetId + 1, // Usamos un código diferente para el botón
+            manageIntent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
-        views.setOnClickPendingIntent(R.id.manage_inventory_button, pendingAppIntent)
 
-        // Configurar el PendingIntent para el icono de configuración (engranaje)
-        // Por ahora, también abrirá MainActivity, pero podrías tener una SettingsActivity.
-        views.setOnClickPendingIntent(R.id.settings_icon, pendingAppIntent)
+        // Aplicar el PendingIntent al botón y al icono de ajustes (Criterio 13)
+        views.setOnClickPendingIntent(R.id.manage_inventory_button, managePendingIntent)
+        views.setOnClickPendingIntent(R.id.settings_icon, managePendingIntent)
 
-
-        // Indicar al AppWidgetManager que actualice el widget con las nuevas vistas
         appWidgetManager.updateAppWidget(appWidgetId, views)
     }
+
 }

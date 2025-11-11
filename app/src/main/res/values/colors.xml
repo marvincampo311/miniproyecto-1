@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="orange_inventory">#e7522e</color>
-
-    <color name="widget_background_color">#E6000000</color> </resources>
+    <!-- Naranja Principal del Widget (FA8523) - Usado para texto de valor, título y el botón. -->
+    <color name="inventory_orange">#FA8523</color>
+    <!-- Color de fondo semitransparente (CC000000 = 80% negro) que se define en widget_background.xml,
+         pero se mantiene aquí para referencia.
+    <color name="widget_background_color_80">#CC000000</color>
+    -->
+</resources>

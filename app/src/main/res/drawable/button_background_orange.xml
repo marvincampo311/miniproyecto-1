@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Criterio 11: Botón con fondo naranja (#FA8523) y esquinas redondeadas -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#FA8523" />
+    <corners android:radius="8dp" />
+</shape>

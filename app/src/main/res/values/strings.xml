@@ -7,4 +7,10 @@
     <string name="content_description_toggle_visibility">Alternar visibilidad del inventario</string>
     <string name="content_description_settings">Ajustes del widget</string>
     <string name="app_widget_description">Widget para ver y gestionar tu inventario rápidamente.</string>
+    <string name="inventario_logo">Inventario Logo</string>
+    <string name="inventario_general">Inventario General</string>
+    <string name="ajustes_de_inventario">Ajustes de Inventario</string>
+    <string name="valor_de_inventario">Valor de Inventario:</string>
+    <string name="alternar_visibilidad_del_inventario">Alternar visibilidad del inventario</string>
+    <string name="gestionar_inventario">Gestionar Inventario</string>
 </resources>
