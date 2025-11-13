@@ -4,7 +4,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Naranja Principal del Widget (FA8523) - Usado para texto de valor, título y el botón. -->
-    <color name="inventory_orange">#FA8523</color>
+    <color name="orange_inventory">#FA8523</color>
     <!-- Color de fondo semitransparente (CC000000 = 80% negro) que se define en widget_background.xml,
          pero se mantiene aquí para referencia.
     <color name="widget_background_color_80">#CC000000</color>
