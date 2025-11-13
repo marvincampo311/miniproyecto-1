@@ -15,5 +15,13 @@
     <color name="inventory_orange">#FFF96D2E</color>
     <color name="inventory_orange_light">#FFFCA37D</color>
     <color name="inventory_orange_dark">#FFC74917</color>
+    <color name="toolbar_dark_gray">#424242</color>
+
+    <!-- COLOR CLAVE para la Toolbar: #424242 -->
+    <color name="home_background_dark">#121212</color>
+    <color name="card_background_light">#FFFFFF</color>
+    <color name="text_primary_dark">#E0E0E0</color>
+
+
 
 </resources>

@@ -31,16 +31,8 @@
         <activity
             android:name=".HomeActivity"
             android:exported="false"
-            android:theme="@style/Theme.Miiproyecto1.NoActionBar">
-
-            <!-- Intent Filter para recibir la acción desde el Widget (HU 1.0) -->
-            <intent-filter>
-                <action android:name="com.example.ACTION_MANAGE_INVENTORY" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <!-- Debe coincidir con el scheme usado en el widget -->
-                <data android:scheme="inventory" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.Miiproyecto1.NoActionBar"
+            />
 
         <!-- PROVEEDOR DE WIDGET (HU 1.0) -->
         <receiver
