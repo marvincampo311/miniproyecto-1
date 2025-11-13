@@ -7,7 +7,6 @@
     android:background="@color/home_background_dark"
     tools:context=".HomeActivity">
 
-    <!-- Toolbar con color gris #424242 (login_dark_gray) -->
     <!-- Al usar Theme.Miiproyecto1.NoActionBar, esta Toolbar se pega a la barra de estado. -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
