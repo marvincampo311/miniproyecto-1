@@ -3,6 +3,7 @@ package com.example.miiproyecto1
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -71,10 +72,16 @@ class HomeActivity : AppCompatActivity() {
      * Criterios 3.0 y 3.2: Configura el RecyclerView con la lista de productos.
      */
     private fun setupRecyclerView() {
+        binding.loadingIndicator.visibility = View.VISIBLE
+        binding.recyclerView.visibility = View.GONE
+
         Thread {
             val db = AppDatabase.getDatabase(applicationContext)
             val productList = db.productDao().getAllProducts()
             runOnUiThread {
+                binding.loadingIndicator.visibility = View.GONE
+                binding.recyclerView.visibility = View.VISIBLE
+
                 val adapter = ProductAdapter(productList)
                 adapter.onItemClick = { product ->
                     val intent = Intent(this, ProductDetailActivity::class.java)
